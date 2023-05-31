@@ -1,21 +1,19 @@
 from flask import request, jsonify
 from . import credit_api
+from .models import CreditInfo
 
-@credit_api.route('/credit', methods=['POST'])
+@credit_api.route('/credit',methods=['POST'])
 def predict_credit():
-    # Obtener el JSON enviado en el request
-    credit_info = request.json
-
-    # Llamar a la otra API de predicción
-    prediction = call_prediction_api(credit_info)
-    print("test")
-    # Devolver la respuesta como un JSON
-    return jsonify(prediction)
+    data = request.json
+    print(data)
+    # validate with the schema
+    try:
+        credit_info = CreditInfo(**data)
+    except Exception as e:
+        return jsonify({'error': str(e)}), 400
+    call_prediction_api(credit_info)
+    # call prediction api
+    return jsonify({'message': 'Successfull POST'})
 
 def call_prediction_api(credit_info):
     print("test")
-    # Aquí debes implementar la lógica para llamar a la otra API de predicción
-    # utilizando la información de crédito recibida en el JSON.
-
-    # Por ejemplo:
-    # import requests

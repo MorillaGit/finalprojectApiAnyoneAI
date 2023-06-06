@@ -31,6 +31,7 @@ def predict_credit():
     call_prediction_api(credit_info)
     # call prediction api
     return jsonify({'message': 'Successfull POST'})
+    
 def load_data_checkpoint(path):
     if os.path.exists(path):
         with open(path, "rb") as f:

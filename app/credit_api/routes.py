@@ -1,6 +1,8 @@
+from .risk_prediction import call_prediction
 from flask import request, jsonify
 from . import credit_api
 from .models import CreditInfo
+
 
 @credit_api.route('/credit',methods=['POST'])
 def predict_credit():
@@ -11,9 +13,7 @@ def predict_credit():
         credit_info = CreditInfo(**data)
     except Exception as e:
         return jsonify({'error': str(e)}), 400
-    call_prediction_api(credit_info)
     # call prediction api
-    return jsonify({'message': 'Successfull POST'})
+    estimation=call_prediction(credit_info)
 
-def call_prediction_api(credit_info):
-    print("test")
+    return jsonify({'message': 'Successfull POST','creditRisk':estimation})

@@ -3,3 +3,13 @@ flask_restful
 pydantic
 flask-cors
 typing
+mlflow 
+numpy 
+pandas
+lightgbm
+matplotlib
+psutil
+scipy
+python-dotenv
+cloudpathlib
+boto3
